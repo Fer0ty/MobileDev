@@ -50,12 +50,20 @@ fun RoomsScreen(navController: NavController, roomDatabaseHelper: RoomDatabaseHe
                 ),
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Назад", tint = Color.White)
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Назад",
+                            tint = Color.White
+                        )
                     }
                 },
                 actions = {
                     IconButton(onClick = { navController.navigate("add_room") }) {
-                        Icon(imageVector = Icons.Default.Add, contentDescription = "Добавить", tint = Color.White)
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = "Добавить",
+                            tint = Color.White
+                        )
                     }
                 },
                 modifier = Modifier.background(Color(0xFF6200EE))
@@ -80,6 +88,7 @@ fun RoomsScreen(navController: NavController, roomDatabaseHelper: RoomDatabaseHe
         }
     )
 }
+
 @Preview(showBackground = true)
 @Composable
 fun RoomsScreenPreview() {

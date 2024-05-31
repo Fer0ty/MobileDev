@@ -8,7 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper
 
 data class Device(val id: Long, val name: String, val type: String, val room: String)
 
-class DeviceDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class DeviceDatabaseHelper(context: Context) :
+    SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
         private const val DATABASE_NAME = "smart_home.db"
@@ -58,7 +59,8 @@ class DeviceDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABAS
 
     fun getDeviceById(id: Long): Device? {
         val db = readableDatabase
-        val cursor: Cursor = db.rawQuery("SELECT * FROM $TABLE_DEVICES WHERE $COLUMN_ID = ?", arrayOf(id.toString()))
+        val cursor: Cursor =
+            db.rawQuery("SELECT * FROM $TABLE_DEVICES WHERE $COLUMN_ID = ?", arrayOf(id.toString()))
         var device: Device? = null
         if (cursor.moveToFirst()) {
             val name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME))
@@ -98,7 +100,8 @@ class DeviceDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABAS
     fun getDevicesByRoom(roomName: String): List<Device> {
         val devices = mutableListOf<Device>()
         val db = readableDatabase
-        val cursor: Cursor = db.rawQuery("SELECT * FROM $TABLE_DEVICES WHERE $COLUMN_ROOM = ?", arrayOf(roomName))
+        val cursor: Cursor =
+            db.rawQuery("SELECT * FROM $TABLE_DEVICES WHERE $COLUMN_ROOM = ?", arrayOf(roomName))
         with(cursor) {
             while (moveToNext()) {
                 val id = getLong(getColumnIndexOrThrow(COLUMN_ID))

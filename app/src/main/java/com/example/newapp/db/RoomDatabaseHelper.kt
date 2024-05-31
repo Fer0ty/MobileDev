@@ -9,7 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper
 
 data class Room(val id: Long, val name: String)
 
-class RoomDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class RoomDatabaseHelper(context: Context) :
+    SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
         private const val DATABASE_NAME = "smart_home2.db"
@@ -53,7 +54,8 @@ class RoomDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
 
     fun getRoomById(id: Long): Room? {
         val db = readableDatabase
-        val cursor: Cursor = db.rawQuery("SELECT * FROM $TABLE_ROOMS WHERE $COLUMN_ID = ?", arrayOf(id.toString()))
+        val cursor: Cursor =
+            db.rawQuery("SELECT * FROM $TABLE_ROOMS WHERE $COLUMN_ID = ?", arrayOf(id.toString()))
         var room: Room? = null
         if (cursor.moveToFirst()) {
             val name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME))

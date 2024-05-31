@@ -42,7 +42,11 @@ import com.example.newapp.db.RoomDatabaseHelper
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddDeviceScreen(navController: NavController, deviceDatabaseHelper: DeviceDatabaseHelper, roomDatabaseHelper: RoomDatabaseHelper) {
+fun AddDeviceScreen(
+    navController: NavController,
+    deviceDatabaseHelper: DeviceDatabaseHelper,
+    roomDatabaseHelper: RoomDatabaseHelper
+) {
     var deviceName by remember { mutableStateOf("") }
     var deviceType by remember { mutableStateOf("") }
     var selectedRoom by remember { mutableStateOf<Room?>(null) }
@@ -62,15 +66,23 @@ fun AddDeviceScreen(navController: NavController, deviceDatabaseHelper: DeviceDa
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Назад", tint = Color.White)
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Назад",
+                            tint = Color.White
+                        )
                     }
                 },
                 actions = {
                     IconButton(onClick = { navController.navigate("add_device") }) {
-                        Icon(imageVector = Icons.Default.Add, contentDescription = "Добавить", tint = Color.White)
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = "Добавить",
+                            tint = Color.White
+                        )
                     }
                 },
-                modifier = Modifier.background( Color(0xFF6200EE))
+                modifier = Modifier.background(Color(0xFF6200EE))
             )
         },
         content = { paddingValues ->
@@ -103,7 +115,9 @@ fun AddDeviceScreen(navController: NavController, deviceDatabaseHelper: DeviceDa
                             Icon(
                                 imageVector = if (expandedDeviceType) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
                                 contentDescription = null,
-                                modifier = Modifier.clickable { expandedDeviceType = !expandedDeviceType }
+                                modifier = Modifier.clickable {
+                                    expandedDeviceType = !expandedDeviceType
+                                }
                             )
                         },
                         modifier = Modifier
@@ -170,7 +184,11 @@ fun AddDeviceScreen(navController: NavController, deviceDatabaseHelper: DeviceDa
                 Button(
                     onClick = {
                         if (deviceName.isNotBlank() && deviceType.isNotBlank() && selectedRoom != null) {
-                            deviceDatabaseHelper.addDevice(deviceName, deviceType, selectedRoom!!.name)
+                            deviceDatabaseHelper.addDevice(
+                                deviceName,
+                                deviceType,
+                                selectedRoom!!.name
+                            )
                             navController.popBackStack() // Возврат на предыдущий экран
                         }
                     },
